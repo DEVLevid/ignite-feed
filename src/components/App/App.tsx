@@ -1,6 +1,8 @@
-import Header from "./components/Header/Header";
+
+import Header from "../Header/Header";
+import SideBar from "../SideBar/SideBar";
 import styles from "./app.module.css";
-import SideBar from "./components/SideBar/SideBar";
+
 
 export default function App() {
   return (
