@@ -65,6 +65,7 @@
 }
 
 .editBtn {
+  position: absolute;
   background: none;
   border: 1px solid;
   border-radius: 0.5rem;
@@ -75,8 +76,6 @@
 
   color: var(--green-500);
   font-weight: 500;
-
-  margin-top: 1.5rem;
   cursor: pointer;
 
   display: flex;
