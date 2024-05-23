@@ -84,6 +84,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .editBtn:hover {
