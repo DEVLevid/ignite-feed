@@ -1,0 +1,21 @@
+.headerContainer {
+  background: var(--gray-800);
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 0;
+}
+
+.headerContainer img {
+  height: 2rem;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+strong {
+  font-size: 25.59px;
+  color: var(--gray-100);
+}
