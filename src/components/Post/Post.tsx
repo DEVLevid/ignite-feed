@@ -1,3 +1,4 @@
+import Comments from "../Comments/Comments";
 import styles from "./styles.module.css";
 
 export default function Post() {
@@ -40,6 +41,8 @@ export default function Post() {
                     </form>
                 </div>
             </footer>
+
+            <Comments />
         </div>
     );
 }

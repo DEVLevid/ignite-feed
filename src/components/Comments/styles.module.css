@@ -1,0 +1,76 @@
+.commentContainer {
+    margin-top: 2rem;
+}
+
+.commentContent {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.profilePicture {
+    width: 50px;
+    height: 50px;
+    border-radius: 0.5rem;
+}
+
+.content {
+    background-color: var(--gray-600);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    height: 7.5rem;
+    margin-bottom: 1rem;
+}
+
+.content header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profileName {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.profileName strong {
+    font-size: 1rem;
+}
+
+.btnTrash{
+    background: transparent;
+    border: none;
+    color: var(--gray-300);
+    cursor: pointer;
+    line-height: 0;
+}
+
+.btnTrash:hover {
+    color: var(--red-500);
+}
+
+.time {
+    font-size: 12px;
+    margin-bottom: 1rem;
+}
+
+.likeContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 4.5rem;
+}
+
+.btn{
+    background: transparent;
+    border: none;
+    color: var(--gray-300);
+    cursor: pointer;
+    line-height: 0;
+}
