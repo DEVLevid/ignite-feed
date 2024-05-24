@@ -30,7 +30,7 @@ export default function Post() {
             </div>
 
             <footer>
-                <div className={styles.coment}>
+                <div className={styles.comment}>
                     <strong>Deixe seu Feedback</strong>
                     <form action="">
                         <textarea placeholder="Esreva um Comentário..."></textarea>
