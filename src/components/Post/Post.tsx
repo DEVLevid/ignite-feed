@@ -1,34 +1,62 @@
 import Avatar from "../Avatar/Avatar";
 import Comments from "../Comments/Comments";
 import styles from "./styles.module.css";
+import { format, formatDistance, formatDistanceToNow } from 'date-fns'
+import {ptBR} from 'date-fns/locale/pt-BR'
 
-export default function Post() {
+interface Author {
+    name: string;
+    role: string;
+    pictureUrl: string;
+  }
+  
+  interface Content {
+    type: string;
+    content: string;
+  }
+  
+  interface Props {
+    author: Author;
+    content: Content[];
+    publishedAt: Date;
+  }
+
+export default function Post({author, content, publishedAt}: Props) {
+    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h' ", {
+        locale: ptBR
+    })
+
+    const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+        locale: ptBR,
+        addSuffix: true,
+    })
+
     return (
         <div className={styles.postContainer}>
             <header className={styles.header}>
                 <div className={styles.author}>
                     <div className={styles.authorImg}>
-                        <Avatar hasBorder={true} src='http://www.github.com/DEVLevid.png'/>
+                        <Avatar hasBorder={true} src={author.pictureUrl}/>
                     </div>
                     <div className={styles.authorInfo}>
-                        <strong>Levid Lima</strong>
-                        <p>Web Developer</p>
+                        <strong>{author.name}</strong>
+                        <p>{author.role}</p>
                     </div>
                 </div>
 
-                <div title="23 de maio de 2024" className={styles.time}>
-                    <p>Publicado há 1h</p>
+                <div title={publishedDateFormatted} className={styles.time}>
+                    <p>{publishedDateRelativeToNow}</p>
                 </div>
             </header>
 
             <div className={styles.content}>
-                <p>Fala galeraa 👋</p>
-                <p>
-                    Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
-                    no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-                </p>
-                <a href="">👉 jane.design/doctorcare</a>
-                <a href="">#novoprojeto #nlw #rocketseat</a>
+                {content.map(c => {
+                    if(c.type === 'paragraph') {
+                        return <p>{c.content}</p>
+                    } else {
+                        return <a>{c.content}</a>
+                    }
+                })}
             </div>
 
             <footer>

@@ -1,8 +1,9 @@
 
 import Header from "../Header/Header";
-import Post from "../Post/Post";
 import SideBar from "../SideBar/SideBar";
 import styles from "./app.module.css";
+import { posts } from '../../data/Posts'
+import Post from "../Post/Post";
 
 
 export default function App() {
@@ -12,8 +13,16 @@ export default function App() {
       <div className={styles.wrapper}>
         <SideBar />
         <main>
-          <Post />
-          <Post />
+          {posts.map(post => {
+            return (
+              <Post 
+              key={post.id}
+              author={post.Author}
+              content={post.content}
+              publishedAt={post.publishedAt}
+              />
+            ) 
+          })}
         </main>
       </div>
     </div>
