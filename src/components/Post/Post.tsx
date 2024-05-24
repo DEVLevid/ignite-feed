@@ -32,18 +32,26 @@ export default function Post({ author, content, publishedAt }: Props) {
         addSuffix: true,
     })
 
-    const [comment, setComment] = useState(['topzera'])
+    const [comments, setComments] = useState(['topzera'])
     const [newCommentText, setNewCommentText] = useState('')
 
     const HandleCreateNewComment = () => {
         event?.preventDefault()
-        setComment([...comment, newCommentText])
+        setComments([...comments, newCommentText])
         setNewCommentText('')
     }
 
     const handleNewCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-       setNewCommentText(event.target.value)
+        setNewCommentText(event.target.value)
     }
+
+    function deleteComments(commentToDelete: string) {
+        const commentsWithoutDeletedOne = comments.filter(comment => {
+            return comment != commentToDelete;
+        })
+
+        setComments(commentsWithoutDeletedOne)
+    } 
 
     return (
         <div className={styles.postContainer}>
@@ -64,7 +72,7 @@ export default function Post({ author, content, publishedAt }: Props) {
             </header>
 
             <div className={styles.content}>
-                {content.map(line  => {
+                {content.map(line => {
                     if (line.type === 'paragraph') {
                         return <p key={line.content}>{line.content}</p>
                     } else {
@@ -85,9 +93,14 @@ export default function Post({ author, content, publishedAt }: Props) {
                 </div>
             </footer>
 
-            {comment.map(com => {
-                return <Comments key={com} content={com} />
-            }) }
+            {comments.map(com => {
+                return (
+                    <Comments
+                        key={com}
+                        content={com}
+                        deleteComments={deleteComments}
+                    />)
+            })}
         </div>
     );
 }
