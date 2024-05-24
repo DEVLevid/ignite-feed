@@ -1,27 +1,28 @@
+import { useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import Comments from "../Comments/Comments";
 import styles from "./styles.module.css";
-import { format, formatDistance, formatDistanceToNow } from 'date-fns'
-import {ptBR} from 'date-fns/locale/pt-BR'
+import { format, formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale/pt-BR'
 
 interface Author {
     name: string;
     role: string;
     pictureUrl: string;
-  }
-  
-  interface Content {
+}
+
+interface Content {
     type: string;
     content: string;
-  }
-  
-  interface Props {
+}
+
+interface Props {
     author: Author;
     content: Content[];
     publishedAt: Date;
-  }
+}
 
-export default function Post({author, content, publishedAt}: Props) {
+export default function Post({ author, content, publishedAt }: Props) {
     const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h' ", {
         locale: ptBR
     })
@@ -31,12 +32,25 @@ export default function Post({author, content, publishedAt}: Props) {
         addSuffix: true,
     })
 
+    const [comment, setComment] = useState(['topzera'])
+    const [newCommentText, setNewCommentText] = useState('')
+
+    const HandleCreateNewComment = () => {
+        event?.preventDefault()
+        setComment([...comment, newCommentText])
+        setNewCommentText('')
+    }
+
+    const handleNewCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+       setNewCommentText(event.target.value)
+    }
+
     return (
         <div className={styles.postContainer}>
             <header className={styles.header}>
                 <div className={styles.author}>
                     <div className={styles.authorImg}>
-                        <Avatar hasBorder={true} src={author.pictureUrl}/>
+                        <Avatar hasBorder={true} src={author.pictureUrl} />
                     </div>
                     <div className={styles.authorInfo}>
                         <strong>{author.name}</strong>
@@ -50,11 +64,11 @@ export default function Post({author, content, publishedAt}: Props) {
             </header>
 
             <div className={styles.content}>
-                {content.map(c => {
-                    if(c.type === 'paragraph') {
-                        return <p>{c.content}</p>
+                {content.map(line  => {
+                    if (line.type === 'paragraph') {
+                        return <p key={line.content}>{line.content}</p>
                     } else {
-                        return <a>{c.content}</a>
+                        return <a key={line.content}>{line.content}</a>
                     }
                 })}
             </div>
@@ -62,8 +76,8 @@ export default function Post({author, content, publishedAt}: Props) {
             <footer>
                 <div className={styles.comment}>
                     <strong>Deixe seu Feedback</strong>
-                    <form action="">
-                        <textarea placeholder="Esreva um Comentário..."></textarea>
+                    <form action="" onSubmit={HandleCreateNewComment}>
+                        <textarea name="comment" onChange={handleNewCommentChange} value={newCommentText} placeholder="Esreva um Comentário..."></textarea>
                         <div className={styles.btnContainer}>
                             <button type="submit" className={styles.submitBtn}>Publicar</button>
                         </div>
@@ -71,7 +85,9 @@ export default function Post({author, content, publishedAt}: Props) {
                 </div>
             </footer>
 
-            <Comments />
+            {comment.map(com => {
+                return <Comments key={com} content={com} />
+            }) }
         </div>
     );
 }

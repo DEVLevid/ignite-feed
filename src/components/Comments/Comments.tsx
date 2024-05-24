@@ -2,7 +2,11 @@ import { ThumbsUp, Trash } from '@phosphor-icons/react'
 import styles from './styles.module.css'
 import Avatar from '../Avatar/Avatar'
 
-export default function Comments() {
+interface Props {
+    content: string
+}
+
+export default function Comments({content}: Props) {
     return (
         <div className={styles.commentContainer}>
             <div className={styles.commentContent}>
@@ -18,7 +22,7 @@ export default function Comments() {
                         <button title='apagar o comentário' className={styles.btnTrash}><Trash size={20}/></button>
                     </header>
                     <p title='Publicado em 23 de maio de 2024' className={styles.time}>cerca de 3 horas</p>
-                    <p>Muito bom Devon, parabéns!! 👏👏</p>
+                    <p>{content} 👏👏</p>
                 </div>
             </div>
             <div className={styles.likeContainer}>
