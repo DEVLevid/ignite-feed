@@ -23,21 +23,6 @@
 .authorImg {
     width: 60px;
     height: 60px;
-
-    border: 2px solid;
-    border-color: var(--green-500);
-    border-radius: 0.5rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.authorImg img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 0.5rem;
 }
 
 .authorInfo {

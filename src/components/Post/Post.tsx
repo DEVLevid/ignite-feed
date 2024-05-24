@@ -1,3 +1,4 @@
+import Avatar from "../Avatar/Avatar";
 import Comments from "../Comments/Comments";
 import styles from "./styles.module.css";
 
@@ -7,7 +8,7 @@ export default function Post() {
             <header className={styles.header}>
                 <div className={styles.author}>
                     <div className={styles.authorImg}>
-                        <img src="https://www.github.com/DEVLevid.png" alt="levid" />
+                        <Avatar hasBorder={true} src='http://www.github.com/DEVLevid.png'/>
                     </div>
                     <div className={styles.authorInfo}>
                         <strong>Levid Lima</strong>
