@@ -1,5 +1,5 @@
 .postContainer {
-    width: 52rem;
+    max-width: 52rem;
     height: fit-content;
 
     border-radius: 0.5rem;
