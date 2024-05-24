@@ -23,6 +23,9 @@ interface Props {
 }
 
 export default function Post({ author, content, publishedAt }: Props) {
+    const [comments, setComments] = useState(['topzera'])
+    const [newCommentText, setNewCommentText] = useState('')
+
     const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h' ", {
         locale: ptBR
     })
@@ -32,17 +35,19 @@ export default function Post({ author, content, publishedAt }: Props) {
         addSuffix: true,
     })
 
-    const [comments, setComments] = useState(['topzera'])
-    const [newCommentText, setNewCommentText] = useState('')
-
-    const HandleCreateNewComment = () => {
+    const handleCreateNewComment = () => {
         event?.preventDefault()
         setComments([...comments, newCommentText])
         setNewCommentText('')
     }
 
+    const handleNewCommentInvalid= (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        event.target.setCustomValidity('Este campo é obrigatório')
+    }
+
     const handleNewCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setNewCommentText(event.target.value)
+        event.target.setCustomValidity('')
     }
 
     function deleteComments(commentToDelete: string) {
@@ -52,6 +57,8 @@ export default function Post({ author, content, publishedAt }: Props) {
 
         setComments(commentsWithoutDeletedOne)
     } 
+
+    const isNewCOmmentEmpty = newCommentText.length === 0;
 
     return (
         <div className={styles.postContainer}>
@@ -84,10 +91,17 @@ export default function Post({ author, content, publishedAt }: Props) {
             <footer>
                 <div className={styles.comment}>
                     <strong>Deixe seu Feedback</strong>
-                    <form action="" onSubmit={HandleCreateNewComment}>
-                        <textarea name="comment" onChange={handleNewCommentChange} value={newCommentText} placeholder="Esreva um Comentário..."></textarea>
+                    <form action="" onSubmit={handleCreateNewComment}>
+                        <textarea name="comment"
+                         onChange={handleNewCommentChange} 
+                         value={newCommentText} 
+                         placeholder="Esreva um Comentário..."
+                         onInvalid={handleNewCommentInvalid}
+                         required
+                         ></textarea>
+
                         <div className={styles.btnContainer}>
-                            <button type="submit" className={styles.submitBtn}>Publicar</button>
+                            <button type="submit" disabled={isNewCOmmentEmpty} className={styles.submitBtn}>Publicar</button>
                         </div>
                     </form>
                 </div>

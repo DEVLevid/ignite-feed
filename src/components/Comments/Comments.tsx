@@ -7,7 +7,7 @@ interface Props {
     deleteComments: any
 }
 
-export default function Comments({ content, deleteComments }: Props) {
+export default function Comments({content, deleteComments}: Props) {
     return (
         <div className={styles.commentContainer}>
             <div className={styles.commentContent}>
@@ -19,15 +19,14 @@ export default function Comments({ content, deleteComments }: Props) {
                             <strong>Levid Lima</strong>
                             <p>(voce)</p>
                         </div>
-
-                        <button title='apagar o comentário' onClick={deleteComments} className={styles.btnTrash}><Trash size={20} /></button>
+                        <button title='apagar o comentário' onClick={deleteComments} className={styles.btnTrash}><Trash size={20}/></button>
                     </header>
                     <p title='Publicado em 23 de maio de 2024' className={styles.time}>cerca de 3 horas</p>
                     <p>{content} 👏👏</p>
                 </div>
             </div>
             <div className={styles.likeContainer}>
-                <button type='submit' title='Aplaudir' className={styles.btn}><ThumbsUp size={20} /></button>
+            <button type='submit' title='Aplaudir' className={styles.btn}><ThumbsUp size={20} /></button> 
                 <p>Aplaudir • <span>03</span></p>
             </div>
         </div>
