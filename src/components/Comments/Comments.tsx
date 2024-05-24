@@ -1,6 +1,7 @@
 import { ThumbsUp, Trash } from '@phosphor-icons/react'
 import styles from './styles.module.css'
 import Avatar from '../Avatar/Avatar'
+import { useState } from 'react'
 
 interface Props {
     content: string,
@@ -8,6 +9,12 @@ interface Props {
 }
 
 export default function Comments({content, deleteComments}: Props) {
+    const [likeCount, setLikeCount] = useState(0)
+    function handleLikeComment() {
+        setLikeCount((state)=> {
+            return state + 1
+        })
+    }
     return (
         <div className={styles.commentContainer}>
             <div className={styles.commentContent}>
@@ -26,8 +33,8 @@ export default function Comments({content, deleteComments}: Props) {
                 </div>
             </div>
             <div className={styles.likeContainer}>
-            <button type='submit' title='Aplaudir' className={styles.btn}><ThumbsUp size={20} /></button> 
-                <p>Aplaudir • <span>03</span></p>
+            <button onClick={handleLikeComment} type='submit' title='Aplaudir' className={styles.btn}><ThumbsUp size={20} /></button> 
+                <p>Aplaudir • <span>{likeCount}</span></p>
             </div>
         </div>
     )
