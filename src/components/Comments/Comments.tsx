@@ -5,11 +5,14 @@ import { useState } from 'react'
 
 interface Props {
     content: string,
-    deleteComments: any
+    deleteComments: (comment: string)=> void;
 }
 
 export default function Comments({content, deleteComments}: Props) {
     const [likeCount, setLikeCount] = useState(0)
+    function handleDeleteComment(){
+        deleteComments(content)
+    }
     function handleLikeComment() {
         setLikeCount((state)=> {
             return state + 1
@@ -26,10 +29,10 @@ export default function Comments({content, deleteComments}: Props) {
                             <strong>Levid Lima</strong>
                             <p>(voce)</p>
                         </div>
-                        <button title='apagar o comentário' onClick={deleteComments} className={styles.btnTrash}><Trash size={20}/></button>
+                        <button title='apagar o comentário' onClick={handleDeleteComment} className={styles.btnTrash}><Trash size={20}/></button>
                     </header>
                     <p title='Publicado em 23 de maio de 2024' className={styles.time}>cerca de 3 horas</p>
-                    <p>{content} 👏👏</p>
+                    <p>{content}</p>
                 </div>
             </div>
             <div className={styles.likeContainer}>
